@@ -27,32 +27,31 @@ set "ALICEVISION_ROOT=D:\Video360To3DGS_vers1.3\aliceVision"
 set "FRAME_RATE=1/2"  ( one frame every 2 seconds)
 
 
-and in the secons script you can change the number of splits , the resolution + fov
+And in the second script you can change the number of splits , the resolution + fov
 
-:: =======================================================
-:: 4. SPLIT 360 IMAGES TO 1920x1920 FACES
-:: =======================================================
+@echo off
+setlocal enabledelayedexpansion
 
-echo =======================================================
-echo  Splitting 360 images from:
-echo    %INPUT_DIR%
-echo  Temporary splits in:
-echo    %TMP_DIR%
-echo =======================================================
+rem Get the folder where this .bat resides (with trailing backslash)
+set "BASE_DIR=%~dp0"
 
-for %%F in ("%INPUT_DIR%\*.jpeg") do (
-    set "FRAME_SUBDIR=%TMP_DIR%\%%~nF"
-    if not exist "!FRAME_SUBDIR!" mkdir "!FRAME_SUBDIR!"
-    start "" /B "%ALICEVISION_BIN%\aliceVision_split360Images.exe" ^
-        --input "%%F" ^
-        --output "!FRAME_SUBDIR!" ^
-        --splitMode equirectangular ^
-        --equirectangularNbSplits 6 ^           ****************** ( number of splits)
-        --equirectangularSplitResolution 1920 ^  ****************** (resolution)
-        --fov 90.0 ^                             *******************(fov)
-        --outSfMData "!FRAME_SUBDIR!\%%~nF.sfm"
+echo Script base folder: "%BASE_DIR%"
 
+rem -------------------------------------------------------------------
+rem Ask user for FOV and split resolution (with defaults)
+rem -------------------------------------------------------------------
+set "FOV=90.0"
+set "SPLIT_RES=768"
 
+echo.
+set /p "FOV=Enter FOV in degrees [default: 90.0]: "
+if "%FOV%"=="" set "FOV=90.0"
 
+set /p "SPLIT_RES=Enter split resolution per view (pixels, e.g. 768 or 1200) [default: 768]: "
+if "%SPLIT_RES%"=="" set "SPLIT_RES=768"
 
+echo.
+echo Using FOV=%FOV%
+echo Using equirectangularSplitResolution=%SPLIT_RES%
+echo.
 
