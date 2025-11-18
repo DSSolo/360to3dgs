@@ -4,13 +4,15 @@
 
 3.downalod alice vision and add the bin folder to the env path
 
-4.put the 2 files (1.portableframeextractor.bat  ,  2.split 360.bat) to the folder with the mp4  ** in the first script you can change how many frames does the script extract. 
+4.download colmap+glomap and add the bin folder to the env path
 
-5.change the name of the mp4 to 1.mp4
+5.put the 2 files (1.portableframeextractor.bat  ,  2.split 360.bat) to the folder with the mp4  ** in the first script you can change how many frames does the script extract. 
 
-6.run scripts one by one 
+6.change the name of the mp4 to 1.mp4
 
-7. now you can run the realityscan reconstruction 
+7.run scripts one by one 
+
+8.run the 3dgs 
 
 
 In the portablextractor you can change  how many frames does the script extract.
@@ -54,4 +56,6 @@ echo.
 echo Using FOV=%FOV%
 echo Using equirectangularSplitResolution=%SPLIT_RES%
 echo.
+
+
 
